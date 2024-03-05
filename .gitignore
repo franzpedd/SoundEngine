@@ -1,0 +1,11 @@
+# folders to be ignored
+.build/
+.vs/
+.vscode/
+Thirdparty/steamaudio
+Thirdparty/premake
+
+# files to be ignored
+*.sln
+*.vcxproj
+*.vcxproj.filters
