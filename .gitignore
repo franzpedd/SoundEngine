@@ -10,3 +10,4 @@ Thirdparty/premake
 *.sln
 *.vcxproj
 *.vcxproj.filters
+*.vcxproj.user
