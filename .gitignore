@@ -2,7 +2,8 @@
 .build/
 .vs/
 .vscode/
-Thirdparty/steamaudio
+Thirdparty/libsndfile
+Thirdparty/openal
 Thirdparty/premake
 
 # files to be ignored

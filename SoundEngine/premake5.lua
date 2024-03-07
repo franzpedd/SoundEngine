@@ -11,31 +11,32 @@ project "SoundEngine"
         "Source/**.c",
         "Source/**.h",
         "Source/**.hpp",
-        "Source/**.cpp",
-
-        "Thirdparty/**.c",
-        "Thirdparty/**.h",
-        "Thirdparty/**.hpp",
-        "Thirdparty/**.cpp"
+        "Source/**.cpp"
     }
 
     includedirs
     {
         "%{includelist.SoundEngine}/Source",
-        "%{includelist.SoundEngine}/Thirdparty",
-
-        "%{includelist.SteamAudio}"
+        "%{includelist.OpenAL}",
+        "%{includelist.SoundFile}"
     }
 
-    filter {"system:windows"}
+    links
+    {
+        "%{librarylist.OpenAL}",
+        "%{librarylist.SoundFile}"
+    }
 
+    filter {"configurations:Debug"}
         links
         {
-            "%{librarylist.SteamAudio}/windows-x64/phonon.lib"
+            "%{librarylist.OpenAL_D}",
+            "%{librarylist.SoundFile_D}"
         }
 
-
-        postbuildcommands
+    filter {"configurations:Release"}
+        links
         {
-            "{COPY} %{librarylist.SteamAudio}\\windows-x64\\phonon.dll " .. dirpath
+            "%{librarylist.OpenAL_R}",
+            "%{librarylist.SoundFile_R}"
         }

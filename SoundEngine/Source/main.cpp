@@ -1,15 +1,12 @@
 #include <iostream>
 
-#include "Sound/AudioCore.h"
-#include "Sound/Sound.h"
+#include "Sound/SoundDevice.h"
 
 int main(int argc, char* argv[])
 {
-    std::shared_ptr<Cosmos::sound::AudioCore> audioCore = std::make_shared<Cosmos::sound::AudioCore>();
+	std::cout << "Hello World" << std::endl;
 
-    Cosmos::sound::Sound windSound("../Data/wind.mp3");
+	Cosmos::SoundDevice* soundDevice = Cosmos::SoundDevice::Get();
 
-    std::cout << "Hello World" << std::endl;
-
-    return 0;
+	return 0;
 }

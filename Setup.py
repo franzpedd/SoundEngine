@@ -78,27 +78,75 @@ class Premake :
             if(platform.system() == "Linux") : subprocess.call("{Thirdparty/premake/premake5 gmake2");
             if(platform.system() == "Darwin") : subprocess.call("Thirdparty/premake/premake5 xcode4");
 
-class SteamAudio :
+class OpenAL :
 
     @classmethod
-    def Download(itself, version) :
+    def Clone(itself) :
+        Util.Clone("https://github.com/kcat/openal-soft", "openal", "master");
 
-        if(os.path.isdir("Thirdparty/steamaudio") is False) : os.makedirs(f"Thirdparty/steamaudio");
+    @classmethod
+    def Build(itself) :
+        if(os.path.isdir("Thirdparty/openal") is False) : return;
+        if(os.path.isdir("Thirdparty/openal/build") is False) :  os.makedirs("Thirdparty/openal/build");
 
-        url = f"https://github.com/ValveSoftware/steam-audio/releases/download/v{version}/steamaudio_{version}.zip";
-        path = f"Thirdparty/steamaudio/steamaudio.zip";
+        if(os.path.isdir("Thirdparty/openal/build/Debug") is False) : 
+            os.makedirs("Thirdparty/openal/build/Debug");
 
-        Util.Download(url, path);
-        Util.Decompress(path, "Thirdparty/steamaudio");
+            scriptdir = os.getcwd();
+            os.chdir("Thirdparty/openal");
+            subprocess.call(f"cmake -S . -B build/Debug -DCMAKE_BUILD_TYPE=DEBUG", shell = True);
+            subprocess.call(f"cmake --build build/Debug --config Debug", shell = True);
+            os.chdir(scriptdir);
+
+        if(os.path.isdir("Thirdparty/openal/build/Release") is False) : 
+            os.makedirs("Thirdparty/openal/build/Release");
+        
+            scriptdir = os.getcwd();
+            os.chdir("Thirdparty/openal");
+            subprocess.call(f"cmake -S . -B build/Release -DCMAKE_BUILD_TYPE=RELEASE", shell = True);
+            subprocess.call(f"cmake --build build/Release --config Release", shell = True);
+            os.chdir(scriptdir);
+
+class SoundFile :
+
+    @classmethod
+    def Clone(itself) :
+        Util.Clone("https://github.com/libsndfile/libsndfile", "libsndfile", "master");
+
+    @classmethod
+    def Build(itself) :
+        if(os.path.isdir("Thirdparty/libsndfile") is False) : return;
+        if(os.path.isdir("Thirdparty/libsndfile/build") is False) :  os.makedirs("Thirdparty/libsndfile/build");
+
+        if(os.path.isdir("Thirdparty/libsndfile/build/Debug") is False) : 
+            os.makedirs("Thirdparty/libsndfile/build/Debug");
+
+            scriptdir = os.getcwd();
+            os.chdir("Thirdparty/libsndfile");
+            subprocess.call(f"cmake -S . -DCMAKE_BUILD_TYPE=DEBUG -B build/Debug", shell = True);
+            subprocess.call(f"cmake --build build/Debug --config Debug", shell = True);
+            os.chdir(scriptdir);
+
+        if(os.path.isdir("Thirdparty/libsndfile/build/Release") is False) : 
+            os.makedirs("Thirdparty/libsndfile/build/Release");
+        
+            scriptdir = os.getcwd();
+            os.chdir("Thirdparty/libsndfile");
+            subprocess.call(f"cmake -S . -DCMAKE_BUILD_TYPE=RELEASE -B build/Release", shell = True);
+            subprocess.call(f"cmake --build build/Release --config Release", shell = True);
+            os.chdir(scriptdir);
 
 
 # global scope
 
-## clone  steamaudio dependeny
-SteamAudio.Download("4.5.2");
+# download libsndfile and build it
+SoundFile.Clone();
+SoundFile.Build();
 
-## download the building system
+# download openal and build it
+OpenAL.Clone();
+OpenAL.Build();
+
+## download the building system and generate the solution
 Premake.Download("5.0.0-beta2");
-
-## generate building files
 Premake.Generate();
