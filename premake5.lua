@@ -15,10 +15,8 @@ includelist["SoundFile"] = "%{wks.location}/Thirdparty/libsndfile/include"
 
 -- libraries directory
 librarylist = {}
-librarylist["OpenAL_D"] = "%{wks.location}/Thirdparty/openal/build/Debug/OpenAL32.lib"
-librarylist["OpenAL_R"] = "%{wks.location}/Thirdparty/openal/build/Release/OpenAL32.lib"
-librarylist["SoundFile_D"] = "%{wks.location}/Thirdparty/libsndfile/build/Debug/Debug/sndfile.lib"
-librarylist["SoundFile_R"] = "%{wks.location}/Thirdparty/libsndfile/build/Release/Release/sndfile.lib"
+librarylist["OpenAL"] = "%{wks.location}/Thirdparty/openal/build";
+librarylist["SoundFile"] = "%{wks.location}/Thirdparty/libsndfile/build";
 
 -- project
 include "SoundEngine"

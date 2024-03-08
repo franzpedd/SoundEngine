@@ -9,11 +9,13 @@ namespace Cosmos
 
 	SoundDevice::SoundDevice()
 	{
+		// initializes device
 		mDevice = alcOpenDevice(nullptr);
 
 		if (!mDevice)
 			throw("Failed to get sound device");
 
+		// initializes context
 		mContext = alcCreateContext(mDevice, nullptr);
 		
 		if (!mContext)
@@ -22,6 +24,7 @@ namespace Cosmos
 		if (!alcMakeContextCurrent(mContext))
 			throw("Failed to make context current");
 
+		// enumerate extensions
 		const ALCchar* name = nullptr;
 
 		if (alcIsExtensionPresent(mDevice, "ALC_ENUMERATE_ALL_EXT"))

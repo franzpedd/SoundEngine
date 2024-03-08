@@ -20,23 +20,37 @@ project "SoundEngine"
         "%{includelist.OpenAL}",
         "%{includelist.SoundFile}"
     }
+    
+    
 
-    links
-    {
-        "%{librarylist.OpenAL}",
-        "%{librarylist.SoundFile}"
-    }
+    filter { "configurations:Debug" }
 
-    filter {"configurations:Debug"}
-        links
-        {
-            "%{librarylist.OpenAL_D}",
-            "%{librarylist.SoundFile_D}"
-        }
+        -- under windows 
+        if os.host() == "windows" then
+            links
+            {
+                "%{librarylist.OpenAL}/Debug/Debug/OpenAL32.lib",
+                "%{librarylist.SoundFile}/Debug/Debug/sndfile.lib"
+            }
 
-    filter {"configurations:Release"}
-        links
-        {
-            "%{librarylist.OpenAL_R}",
-            "%{librarylist.SoundFile_R}"
-        }
+            postbuildcommands  
+            {
+                "{COPYFILE} %{librarylist.OpenAL}/Debug/Debug/OpenAL32.dll " .. dirpath;
+            }
+        end
+
+    filter {"configurations:Release" }
+        
+        -- under windows 
+        if os.host() == "windows" then
+            links
+            {
+                "%{librarylist.OpenAL}/Release/Release/OpenAL32.lib",
+                "%{librarylist.SoundFile}/Release/Release/sndfile.lib"
+            }
+
+            postbuildcommands  
+            {
+                "{COPYFILE} %{librarylist.OpenAL}/Release/Release/OpenAL32.dll " .. dirpath;
+            }
+        end
