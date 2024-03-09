@@ -107,41 +107,7 @@ class OpenAL :
             subprocess.call(f"cmake --build build/Release --config Release", shell = True);
             os.chdir(scriptdir);
 
-class SoundFile :
-
-    @classmethod
-    def Clone(itself) :
-        Util.Clone("https://github.com/libsndfile/libsndfile", "libsndfile", "master");
-
-    @classmethod
-    def Build(itself) :
-        if(os.path.isdir("Thirdparty/libsndfile") is False) : return;
-        if(os.path.isdir("Thirdparty/libsndfile/build") is False) :  os.makedirs("Thirdparty/libsndfile/build");
-
-        if(os.path.isdir("Thirdparty/libsndfile/build/Debug") is False) : 
-            os.makedirs("Thirdparty/libsndfile/build/Debug");
-
-            scriptdir = os.getcwd();
-            os.chdir("Thirdparty/libsndfile");
-            subprocess.call(f"cmake -S . -DCMAKE_BUILD_TYPE=DEBUG -B build/Debug", shell = True);
-            subprocess.call(f"cmake --build build/Debug --config Debug", shell = True);
-            os.chdir(scriptdir);
-
-        if(os.path.isdir("Thirdparty/libsndfile/build/Release") is False) : 
-            os.makedirs("Thirdparty/libsndfile/build/Release");
-        
-            scriptdir = os.getcwd();
-            os.chdir("Thirdparty/libsndfile");
-            subprocess.call(f"cmake -S . -DCMAKE_BUILD_TYPE=RELEASE -B build/Release", shell = True);
-            subprocess.call(f"cmake --build build/Release --config Release", shell = True);
-            os.chdir(scriptdir);
-
-
 # global scope
-
-# download libsndfile and build it
-SoundFile.Clone();
-SoundFile.Build();
 
 # download openal and build it
 OpenAL.Clone();

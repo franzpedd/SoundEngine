@@ -17,11 +17,8 @@ project "SoundEngine"
     includedirs
     {
         "%{includelist.SoundEngine}/Source",
-        "%{includelist.OpenAL}",
-        "%{includelist.SoundFile}"
+        "%{includelist.OpenAL}"
     }
-    
-    
 
     filter { "configurations:Debug" }
 
@@ -29,8 +26,7 @@ project "SoundEngine"
         if os.host() == "windows" then
             links
             {
-                "%{librarylist.OpenAL}/Debug/Debug/OpenAL32.lib",
-                "%{librarylist.SoundFile}/Debug/Debug/sndfile.lib"
+                "%{librarylist.OpenAL}/Debug/Debug/OpenAL32.lib"
             }
 
             postbuildcommands  
@@ -45,8 +41,7 @@ project "SoundEngine"
         if os.host() == "windows" then
             links
             {
-                "%{librarylist.OpenAL}/Release/Release/OpenAL32.lib",
-                "%{librarylist.SoundFile}/Release/Release/sndfile.lib"
+                "%{librarylist.OpenAL}/Release/Release/OpenAL32.lib"
             }
 
             postbuildcommands  
