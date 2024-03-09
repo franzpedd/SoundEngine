@@ -394,7 +394,7 @@ namespace Cosmos::sound
 
     float WaveLoader::SingleByteToSample(uint8_t sample)
     {
-        return static_cast<float>(sample - 128) / static_cast<float>(128.0f);
+        return static_cast<float>(sample - 128.0f) / static_cast<float>(128.0f);
     }
 
     int16_t WaveLoader::SampleToSixteenBitInt(float sample)
@@ -405,7 +405,7 @@ namespace Cosmos::sound
 
     uint8_t WaveLoader::SampleToSingleByte(float sample)
     {
-        sample = Clamp(sample, -1., 1.);
+        sample = Clamp(sample, -1.0f, 1.0f);
         sample = (sample + 1.0f) / 2.0f;
         return static_cast<uint8_t> (sample * 255.);
     }

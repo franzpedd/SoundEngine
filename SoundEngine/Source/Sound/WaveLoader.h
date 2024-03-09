@@ -16,7 +16,7 @@ namespace Cosmos::sound
             IEEEFloat = 0x0003
         };
 
-        // used to determine on how to save data
+        // used to determine on how to write data
         enum class Endianness
         {
             LittleEndian,
