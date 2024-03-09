@@ -61,7 +61,7 @@ namespace Cosmos::sound
 
                     case 24:
                     {
-                        int32_t sampleAsIntAgain = (int32_t)(mSamples[channel][i] * (float)8388608.);
+                        int32_t sampleAsIntAgain = (int32_t)(mSamples[channel][i] * (float)8388608.0f);
 
                         uint8_t bytes[3] = {};
                         bytes[2] = (uint8_t)(sampleAsIntAgain >> 16) & 0xFF;
