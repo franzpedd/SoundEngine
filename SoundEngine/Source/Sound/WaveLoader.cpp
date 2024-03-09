@@ -207,7 +207,7 @@ namespace Cosmos::sound
                         if (sampleAsInt & 0x800000)
                             sampleAsInt = sampleAsInt | ~0xFFFFFF;
 
-                        float sample = (float)sampleAsInt / (float)8388608.;
+                        float sample = (float)sampleAsInt / (float)8388608.0f;
                         mSamples[channel].push_back(sample);
 
                         break;
@@ -407,6 +407,6 @@ namespace Cosmos::sound
     {
         sample = Clamp(sample, -1.0f, 1.0f);
         sample = (sample + 1.0f) / 2.0f;
-        return static_cast<uint8_t> (sample * 255.);
+        return static_cast<uint8_t> (sample * 255.0f);
     }
 }
