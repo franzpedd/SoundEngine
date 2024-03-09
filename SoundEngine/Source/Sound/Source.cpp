@@ -82,7 +82,7 @@ namespace Cosmos::sound
 		return mPath;
 	}
 
-	const Status Source::GetStatus() const
+	const Source::Status Source::GetStatus() const
 	{
 		return mStatus;
 	}

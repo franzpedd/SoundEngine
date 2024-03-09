@@ -2,21 +2,23 @@
 
 namespace Cosmos::sound
 {
-	// all available status a sound may be at (only on status at the time)
-	typedef enum Status
-	{
-		Initial = 0,
-		Playing,
-		Paused,
-		Stopped
-	} Status;
-
 	// Sources are sounds that exists on the program, they are spatialized and is possible to configure it's property
 	// They are played on a separated thread on the backend side, but beware of how many sound sources exists on a given time
 	// The constructor uploads the sound buffer to the device and it stays there until it is deconstructed
 	// For huge files consider create SourceStream class and implement the loading of parts, but this is not needed right now
 	class Source
 	{
+	public:
+
+		// all available status a sound may be at (only on status at the time)
+		typedef enum Status
+		{
+			Initial = 0,
+			Playing,
+			Paused,
+			Stopped
+		} Status;
+
 	public:
 
 		// constructor
@@ -35,7 +37,7 @@ namespace Cosmos::sound
 		const char* GetPath() const;
 
 		// returns the sound current status
-		const Status GetStatus() const;
+		const Source::Status GetStatus() const;
 
 	public: // controlls the sound status
 
