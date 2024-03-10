@@ -13,7 +13,7 @@ namespace Cosmos::sound
         enum WavAudioFormat
         {
             PCM = 0x0001,
-            IEEEFloat = 0x0003
+            IEEEFloat = 0x0002
         };
 
         // used to determine on how to write data
