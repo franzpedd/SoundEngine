@@ -3,17 +3,28 @@
 #include "WaveLoader.h"
 #include <AL/al.h>
 #include <iostream>
+#include <thread>
 
 namespace Cosmos::sound
 {
 	Source::Source(const char* path)
 		: mPath(path)
 	{
-		// load wave file
-		WaveLoader audioFile;
-		audioFile.Load(path);
+		// load wave file in a separate thread
 		std::vector<uint8_t> monoPCMDataBytes;
-		audioFile.WritePCMToBuffer(monoPCMDataBytes);
+		sound::WaveLoader audioFile = {};
+
+		auto uploadTask = [&monoPCMDataBytes, &path, &audioFile]()
+			{
+				// loads wave file into memory
+				audioFile.Load(path);
+
+				// write PCM data to buffer
+				audioFile.WritePCMToBuffer(monoPCMDataBytes);
+			};
+
+		std::thread uploadThread(uploadTask);
+		uploadThread.join();
 
 		ALenum format = AL_NONE;
 
